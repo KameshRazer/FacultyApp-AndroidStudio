@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,10 +59,14 @@ public class login extends AppCompatActivity {
                             if(password.equals(dbPassword)) {
                                 String name = dataSnapshot.child(userId + "/name").getValue(String.class);
                                 String dept = dataSnapshot.child(userId + "/department").getValue(String.class);
-
+                                String subjectCode = dataSnapshot.child(userId+"/subjectcode").getValue(String.class);
+                                String subjectName = dataSnapshot.child(userId+"/subjectname").getValue(String.class);
                                 LogInfo.edit().putString("name", name).apply();
                                 LogInfo.edit().putString("department", dept).apply();
                                 LogInfo.edit().putBoolean("isLogged",true).apply();
+                                LogInfo.edit().putString("id",userId).apply();
+                                LogInfo.edit().putString("subjectCode",subjectCode).apply();
+                                LogInfo.edit().putString("subjectName",subjectName).apply();
                                 startActivity(new Intent(login.this, MainActivity.class));
                             }
                             else{

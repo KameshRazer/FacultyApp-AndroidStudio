@@ -106,6 +106,7 @@
 
 
                 <ImageView
+                    android:id="@+id/markEntry"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"

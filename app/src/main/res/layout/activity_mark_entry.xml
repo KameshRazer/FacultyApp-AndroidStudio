@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MarkEntryActivity">
+
+    <Spinner
+        android:id="@+id/subjectList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <Spinner
+        android:id="@+id/markList"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subjectList"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="10dp"
+        android:layout_marginStart="10dp" />
+
+    <Spinner
+        android:id="@+id/selectMark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subjectList"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="220dp"
+        android:background="@color/green"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="167dp"
+        android:layout_marginStart="220dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/markList"
+        tools:layout_editor_absoluteX="1dp"
+        android:background="#BEA4CDED"
+        tools:layout_editor_absoluteY="192dp" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/result"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        android:visibility="invisible"
+        android:layout_marginStart="170dp" />
+</RelativeLayout>
