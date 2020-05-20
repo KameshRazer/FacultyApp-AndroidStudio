@@ -20,7 +20,8 @@
         android:id="@+id/hours"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:maxLength="1"
         android:layout_toRightOf="@+id/atd_Rollno"/>
 
     <RadioGroup

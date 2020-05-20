@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,6 +57,8 @@ public class AttendanceActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         totalHours = findViewById(R.id.totalHours);
 
+        btnSave.setVisibility(View.INVISIBLE);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("LoDiNg...");
         logInfo = getSharedPreferences("FacultyLoginInfo",MODE_PRIVATE);
@@ -86,55 +89,70 @@ public class AttendanceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final int n = attendanceAdapter.getItemCount();
                 final int presentId = R.id.present;
-                dbRef = FirebaseDatabase.getInstance().getReference().child("Attendance");
+                boolean isValid =true;
+                for (int i = 0; i <n ; i++) {
+                    View c = recyclerView.getLayoutManager().findViewByPosition(i);
+                    EditText hour = c.findViewById(R.id.hours);
+                    int hr = Integer.parseInt(hour.getText().toString());
+                    if(hr>selectedHour){
+                        hour.setError("Invalid Hour");
+                        isValid = false;
+                    }
+                }
+                if(isValid) {
 
-                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (int i = 0; i <n ; i++) {
-                            View c = recyclerView.getLayoutManager().findViewByPosition(i);
-                            TextView rollno = c.findViewById(R.id.atd_Rollno);
-                            EditText hour = c.findViewById(R.id.hours);
-                            RadioGroup radioGroup = c.findViewById(R.id.status);
-                            final String rollNo = rollno.getText().toString();
-                            int selectedStatusId = radioGroup.getCheckedRadioButtonId();
-                            int presentHrs = Integer.parseInt(hour.getText().toString());
-                            int absentHrs = selectedHour-presentHrs;
-                            String path = rollNo.substring(0,4)+"/"+rollNo+"/"+selectedSubject;
-                            DatabaseReference upRef;
-                            if(presentId == selectedStatusId && presentHrs == selectedHour){
-                                int present = Integer.parseInt(dataSnapshot.child(path+"/Present").getValue().toString());
-                                upRef = dataSnapshot.child(path+"/Present").getRef();
-                                upRef.setValue(present+presentHrs);
-                            }else if(presentId != selectedStatusId){
-                                int absent = Integer.parseInt(dataSnapshot.child(path+"/Absent").getValue().toString());
-                                upRef = dataSnapshot.child(path+"/Absent").getRef();
-                                upRef.setValue(absent+selectedHour);
+
+                    dbRef = FirebaseDatabase.getInstance().getReference().child("Attendance");
+
+                    dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (int i = 0; i < n; i++) {
+                                View c = recyclerView.getLayoutManager().findViewByPosition(i);
+                                TextView rollno = c.findViewById(R.id.atd_Rollno);
+                                EditText hour = c.findViewById(R.id.hours);
+                                RadioGroup radioGroup = c.findViewById(R.id.status);
+                                final String rollNo = rollno.getText().toString();
+                                int selectedStatusId = radioGroup.getCheckedRadioButtonId();
+                                int presentHrs = Integer.parseInt(hour.getText().toString());
+                                int absentHrs = selectedHour - presentHrs;
+                                String path = rollNo.substring(0, 4) + "/" + rollNo + "/" + selectedSubject;
+                                DatabaseReference upRef;
+                                if (presentId == selectedStatusId && presentHrs == selectedHour) {
+                                    int present = Integer.parseInt(dataSnapshot.child(path + "/Present").getValue().toString());
+                                    upRef = dataSnapshot.child(path + "/Present").getRef();
+                                    upRef.setValue(present + presentHrs);
+                                } else if (presentId != selectedStatusId) {
+                                    int absent = Integer.parseInt(dataSnapshot.child(path + "/Absent").getValue().toString());
+                                    upRef = dataSnapshot.child(path + "/Absent").getRef();
+                                    upRef.setValue(absent + selectedHour);
+                                } else if (presentHrs < selectedHour) {
+                                    int present = Integer.parseInt(dataSnapshot.child(path + "/Present").getValue().toString());
+                                    upRef = dataSnapshot.child(path + "/Present").getRef();
+                                    upRef.setValue(present + presentHrs);
+                                    int absent = Integer.parseInt(dataSnapshot.child(path + "/Absent").getValue().toString());
+                                    upRef = dataSnapshot.child(path + "/Absent").getRef();
+                                    upRef.setValue(absent + absentHrs);
+                                }
+                                int totalHrs = Integer.parseInt(dataSnapshot.child(path + "/Total Hours").getValue().toString());
+                                upRef = dataSnapshot.child(path + "/Total Hours").getRef();
+                                upRef.setValue(totalHrs + selectedHour);
                             }
-                            else{
-                                int present = Integer.parseInt(dataSnapshot.child(path+"/Present").getValue().toString());
-                                upRef = dataSnapshot.child(path+"/Present").getRef();
-                                upRef.setValue(present+1);
-                                int absent = Integer.parseInt(dataSnapshot.child(path+"/Absent").getValue().toString());
-                                upRef = dataSnapshot.child(path+"/Absent").getRef();
-                                upRef.setValue(absent+1);
-                            }
-                            int totalHrs = Integer.parseInt(dataSnapshot.child(path+"/Total Hours").getValue().toString());
-                            upRef = dataSnapshot.child(path+"/Total Hours").getRef();
-                            upRef.setValue(totalHrs+selectedHour);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-
+                        }
+                    });
+                }else{
+                    Toast.makeText(getApplicationContext(),"Invalid Hour",Toast.LENGTH_LONG).show();
+                }
 
             }
 
         });
+
 
     }
     class CreateAttendanceList implements AdapterView.OnItemSelectedListener{
@@ -143,6 +161,7 @@ public class AttendanceActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             hours.clear();
 //            attendanceAdapter.notifyDataSetChanged();
+            btnSave.setVisibility(View.INVISIBLE);
             if(position>0){
                 selectedSubject=parent.getSelectedItem().toString();
                 selectedSubjectCode=subjectCode[position-1];
@@ -185,7 +204,9 @@ public class AttendanceActivity extends AppCompatActivity {
                                     hour.add(parent.getSelectedItem().toString());
                                 }
                                 attendanceAdapter.notifyDataSetChanged();
+                                btnSave.setVisibility(View.VISIBLE);
                                 progressDialog.dismiss();
+
                             }
 
                             @Override
