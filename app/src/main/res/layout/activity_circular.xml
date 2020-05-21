@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CircularActivity">
+
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Circular Topic :"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/newMsgTopic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/topic"
+        android:ems="10"
+
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/newMessage"
+        android:layout_width="match_parent"
+        android:layout_below="@id/newMsgTopic"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="Name" />
+
+
+    <Button
+        android:id="@+id/sendNewMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newMessage"
+        android:layout_marginLeft="150dp"
+        android:text="Send" />
+
+    <Spinner
+        android:id="@+id/selectClass"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newMessage"
+        android:layout_toRightOf="@id/sendNewMessage"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/displayMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sendNewMessage"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+
+</RelativeLayout>
