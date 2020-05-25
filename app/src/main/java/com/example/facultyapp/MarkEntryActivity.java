@@ -234,6 +234,7 @@ public class MarkEntryActivity extends AppCompatActivity {
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             String rolln = ds.getKey();
                             String mar = ds.child(selectedCode + "/" + selectedMark).getValue().toString();
+//                            System.out.println(rolln+"/"+selectedCode+"/"+selectedMark+" => "+ds.hasChild(selectedCode + "/" + selectedMark));
                             add(rolln,mar);
                             markAdapter.notifyDataSetChanged();
                         }

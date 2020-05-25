@@ -165,6 +165,7 @@
 
 
                 <ImageView
+                    android:id="@+id/circular"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
