@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView bgapp, clover,markEntry,attendance,circular;
+    ImageView bgapp, clover,markEntry,attendance,circular,student;
     LinearLayout textsplash, texthome, menus;
     Animation frombottom;
     SharedPreferences logInfo;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         markEntry = findViewById(R.id.markEntry);
         attendance = findViewById(R.id.attendance);
+        student = findViewById(R.id.student_atd);
 
         bgapp = (ImageView) findViewById(R.id.bgapp);
         clover = (ImageView) findViewById(R.id.clover);
@@ -75,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,CircularActivity.class));
+            }
+        });
+
+        student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,StudentAtdActivity.class));
             }
         });
     }

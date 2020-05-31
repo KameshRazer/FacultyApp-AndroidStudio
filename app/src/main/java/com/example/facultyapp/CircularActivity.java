@@ -216,7 +216,7 @@ public class CircularActivity extends AppCompatActivity {
 
     public void sendMessage(String msg) {
         final String apiKey = "AAAAuR0ntEs:APA91bFm0VX8SjBQNyF-Jlmgr1WV9-3e1imHya7iPYeHcLGmY5_scz9i5xEX1-LL5ewyXqtY3KHq-vdhZBdAK_72yew7T9-epDU0ieGGu30Kq6GjE3PbpodcQ9deWY2xQMP7h8ePe36Q";
-//        StringBuffer response = new StringBuffer();
+        StringBuffer response = new StringBuffer();
         try {
             URL url = new URL("https://fcm.googleapis.com/fcm/send");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -231,7 +231,7 @@ public class CircularActivity extends AppCompatActivity {
             os.close();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            in.close();
+
 //            int responseCode = conn.getResponseCode();
 //            System.out.println("\nSending 'POST' request to URL : " + url);
 //            System.out.println("Post parameters : " + msg);
@@ -240,11 +240,12 @@ public class CircularActivity extends AppCompatActivity {
 //            while ((inputLine = in.readLine()) != null) {
 //                response.append(inputLine);
 //            }
+            in.close();
 
         } catch(Exception e) {
             e.printStackTrace();
         }
         // print result
-//        System.out.println(response.toString());
+        System.out.println(response.toString());
     }
 }
