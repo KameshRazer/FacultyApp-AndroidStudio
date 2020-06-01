@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class MarkEntryActivity extends AppCompatActivity {
     DatabaseReference dbRef;
     ProgressDialog progressDialog ;
     RecyclerView recyclerView;
-    Button btnSave;
+    Button btnSave,back1;
 
     String[] subjectCode,subjectName = new String[5];
     int codePosition =0;
@@ -62,6 +63,7 @@ public class MarkEntryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.result);
         btnSave = findViewById(R.id.save);
+        back1 = findViewById(R.id.back1);
 
         markAdapter = new MarkEntryAdapter(dataList);
         recyclerView.setAdapter(markAdapter);
@@ -96,7 +98,13 @@ public class MarkEntryActivity extends AppCompatActivity {
         testList.setAdapter(dataAdapter1);
 
         testList.setOnItemSelectedListener(new TestResult());
-
+        back1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(MarkEntryActivity.this,MainActivity.class);
+                startActivity(mark);
+            }
+        });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

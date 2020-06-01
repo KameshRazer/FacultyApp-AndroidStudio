@@ -7,49 +7,95 @@
     android:orientation="vertical"
     tools:context=".MarkEntryActivity">
 
+    <Button
+        android:id="@+id/back1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="Students Mark Entry"/>
+
     <Spinner
         android:id="@+id/subjectList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="90dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/colorAccent"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="33dp" />
+        app:backgroundTint="@color/blue"
+        android:ellipsize="marquee"
+        android:popupBackground="@android:color/darker_gray"
+        tools:layout_editor_absoluteY="33dp"
+        android:popupElevation="3dp"/>
 
     <Spinner
         android:id="@+id/markList"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/subjectList"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
-        android:background="@color/colorPrimary"
+        app:backgroundTint="@color/blue"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="10dp"
         android:layout_marginStart="10dp" />
 
     <Spinner
         android:id="@+id/selectMark"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/subjectList"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/blue"
         android:layout_marginLeft="220dp"
-        android:background="@color/green"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="167dp"
         android:layout_marginStart="220dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll No."
+        android:layout_marginTop="180dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marks"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="170dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="340dp"
+        android:textSize="20sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:layout_below="@+id/markList"
         tools:layout_editor_absoluteX="1dp"
-        android:background="#BEA4CDED"
         tools:layout_editor_absoluteY="192dp" />
 
     <Button

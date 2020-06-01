@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <ImageView
         android:id="@+id/clover"
         android:layout_width="wrap_content"
@@ -59,6 +61,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <TextView
             android:id="@+id/name2"
             android:layout_width="wrap_content"
@@ -72,6 +76,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FFF"
             android:textSize="16sp" />
+
 
     </LinearLayout>
 
@@ -174,7 +179,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Circulars"
+                    android:text="   Send\nCirculars"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -198,17 +203,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Students"
+                    android:text="    Overall\nAttendance"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Button>
 
     <ImageView
         android:id="@+id/bgapp"

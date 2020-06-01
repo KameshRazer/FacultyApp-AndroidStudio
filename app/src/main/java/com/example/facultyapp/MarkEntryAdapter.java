@@ -35,15 +35,23 @@ public class MarkEntryAdapter extends RecyclerView.Adapter<MarkEntryAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         ArrayList<String> data = dataList.get(position);
         TextView rollNo = holder.rollNo;
-        EditText mark = holder.mark;
-        Button update = holder.update;
+        final EditText mark = holder.mark;
+        final Button update = holder.update;
 
         rollNo.setText(data.get(0));
         mark.setText(data.get(1));
+        mark.setFocusable(false);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(position);
+                String text = update.getText().toString();
+                if(text.equals("Edit")){
+                    update.setText("Done");
+                    mark.setFocusableInTouchMode(true);
+                }else{
+                    update.setText("Edit");
+                    mark.setFocusable(false);
+                }
             }
         });
     }

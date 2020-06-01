@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     Animation frombottom;
     SharedPreferences logInfo;
     String name,department;
+    Boolean isLogged;
     TextView TV_name1,TV_name2,TV_department;
+    Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +46,15 @@ public class MainActivity extends AppCompatActivity {
         TV_name2 = findViewById(R.id.name2);
         TV_department = findViewById(R.id.department);
 
+        btnLogout = findViewById(R.id.logout);
+
         logInfo = getSharedPreferences("FacultyLoginInfo",MODE_PRIVATE);
         name = logInfo.getString("name","Error");
         department = logInfo.getString("department","Error");
+        isLogged = logInfo.getBoolean("isLogged",false);
+        if(!isLogged)
+            startActivity(new Intent(MainActivity.this,login.class));
+
 
         TV_name1.setText(name);
         TV_name2.setText(name);
@@ -85,5 +94,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,StudentAtdActivity.class));
             }
         });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logInfo.edit().clear().apply();
+                startActivity(new Intent(MainActivity.this,login.class));
+            }
+        });
     }
+    
 }

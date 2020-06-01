@@ -38,10 +38,6 @@ public class login extends AppCompatActivity {
 
         LogInfo = getSharedPreferences("FacultyLoginInfo",MODE_PRIVATE);
 
-        //Checking previous Login
-        if(LogInfo.getBoolean("isLogged",false)){
-            startActivity(new Intent(login.this,MainActivity.class));
-        }
 
         //SignInButton Action
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +64,8 @@ public class login extends AppCompatActivity {
                                 LogInfo.edit().putString("subjectCode",subjectCode).apply();
                                 LogInfo.edit().putString("subjectName",subjectName).apply();
                                 startActivity(new Intent(login.this, MainActivity.class));
+                                ETuserId.setText("");
+                                ETpassword.setText("");
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Invalid Password",Toast.LENGTH_SHORT).show();
@@ -86,10 +84,18 @@ public class login extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
-
-
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+//        System.out.println("Login onRestart invoked");
+        //Checking previous Login
+        if(LogInfo.getBoolean("isLogged",false)){
+            finishAffinity();
+        }
+    }
+
 }
