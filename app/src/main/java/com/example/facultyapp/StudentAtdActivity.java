@@ -2,6 +2,7 @@ package com.example.facultyapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
@@ -30,6 +31,7 @@ public class StudentAtdActivity extends AppCompatActivity {
     ArrayAdapter<String> dataAdapter;
     ArrayList<String > subjectArray = new ArrayList<>();
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
+    StudentAtdAdapter studentAtdAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class StudentAtdActivity extends AppCompatActivity {
 
         subjectList.setOnItemSelectedListener(new SubjectAttendance());
 
+        studentAtdAdapter = new StudentAtdAdapter(dataList);
+        recyclerView.setAdapter(studentAtdAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
     class SubjectAttendance implements AdapterView.OnItemSelectedListener{
 
@@ -64,13 +70,17 @@ public class StudentAtdActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     year = dataSnapshot.child("Subject/"+selectedSubjectCode+"/class").getValue().toString();
+                    dataList.clear();
                     for(DataSnapshot ds : dataSnapshot.child("Attendance/"+year).getChildren()){
                         ArrayList<String > list = new ArrayList<>();
                         list.add(ds.getKey());
-                        list.add(ds.child(selectedSubjectName+"/Present").getValue().toString());
-                        list.add(ds.child(selectedSubjectName+"/Total Hours").getValue().toString());
+                        float present = Float.parseFloat(ds.child(selectedSubjectName+"/Present").getValue().toString());
+                        float total_hrs = Float.parseFloat(ds.child(selectedSubjectName+"/Total Hours").getValue().toString());
+                        list.add((String.valueOf((int)((present/total_hrs)*100.0))));
                         dataList.add(list);
                     }
+//                    System.out.println("DataList : "+dataList);
+                    studentAtdAdapter.notifyDataSetChanged();
                 }
 
                 @Override
