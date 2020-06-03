@@ -88,7 +88,7 @@ public class CircularActivity extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(newMsg.getText().toString())) {
                     newMsgTopic.setError("Enter Message");
                 }else {
-                    final String topic = newMsgTopic.getText().toString();
+                    final String topic = newMsgTopic.getText().toString().toUpperCase();
                     final String message = newMsg.getText().toString();
                     dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
