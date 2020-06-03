@@ -6,15 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".StudentAtdActivity">
 
+    <Button
+        android:id="@+id/back4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/back"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="Overall Attendance"/>
+
     <Spinner
         android:id="@+id/subject_atd"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roll No."
+        android:layout_marginTop="130dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="90dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Percentage"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="260dp"
+        android:textSize="20sp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subject_atd_recyclerview"
@@ -23,7 +59,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_below="@id/subject_atd"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="73dp" />
 </RelativeLayout>

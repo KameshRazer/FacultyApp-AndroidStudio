@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 public class CircularActivity extends AppCompatActivity {
 
     EditText newMsg,newMsgTopic;
-    Button btnSendMsg;
+    Button btnSendMsg,back2;
     Spinner selectClass;
     RecyclerView displayMessage;
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
@@ -55,6 +56,7 @@ public class CircularActivity extends AppCompatActivity {
         btnSendMsg = findViewById(R.id.sendNewMessage);
         selectClass = findViewById(R.id.selectClass);
         displayMessage = findViewById(R.id.displayMessage);
+        back2 = findViewById(R.id.back2);
 
         circularAdapter = new CircularAdapter(dataList);
         displayMessage.setAdapter(circularAdapter);
@@ -69,16 +71,22 @@ public class CircularActivity extends AppCompatActivity {
         selectClass.setAdapter(yearAdapter);
         selectClass.setOnItemSelectedListener(new selectedYear());
 
+        back2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CircularActivity.this,MainActivity.class));
+            }
+        });
 
         btnSendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dbRef = FirebaseDatabase.getInstance().getReference();
 
-                if(TextUtils.isEmpty(newMsg.getText().toString())){
-                    newMsg.setError("Enter Message");
-                }else if(TextUtils.isEmpty(newMsgTopic.getText().toString())) {
-                    newMsgTopic.setError("Enter Topic");
+                if(TextUtils.isEmpty(newMsgTopic.getText().toString())){
+                    newMsg.setError("Enter Topic");
+                }else if(TextUtils.isEmpty(newMsg.getText().toString())) {
+                    newMsgTopic.setError("Enter Message");
                 }else {
                     final String topic = newMsgTopic.getText().toString();
                     final String message = newMsg.getText().toString();
@@ -96,6 +104,9 @@ public class CircularActivity extends AppCompatActivity {
                                     if(ds.hasChild("TokenId")) {
                                         String token_id = ds.child("TokenId").getValue().toString();
                                         sendPush("Circular",topic,token_id);
+                                        newMsgTopic.setText("");
+                                        newMsg.setText("");
+                                        Toast.makeText(getApplicationContext(),"Circular Posted",Toast.LENGTH_LONG).show();
                                     }
                                 }
                             }

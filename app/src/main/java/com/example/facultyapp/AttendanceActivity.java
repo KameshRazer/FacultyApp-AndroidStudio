@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,7 @@ public class AttendanceActivity extends AppCompatActivity {
     SharedPreferences logInfo;
     Spinner subject,totalHours;
     RecyclerView recyclerView;
-    Button btnSave;
+    Button btnSave,back3;
     String[] subjectCode,subjectName = new String[5];
     String selectedSubject,selectedSubjectCode,year;
     int selectedHour;
@@ -56,6 +57,7 @@ public class AttendanceActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.studentList);
         btnSave = findViewById(R.id.btnSave);
         totalHours = findViewById(R.id.totalHours);
+        back3 = findViewById(R.id.back3);
 
         btnSave.setVisibility(View.INVISIBLE);
 
@@ -83,6 +85,14 @@ public class AttendanceActivity extends AppCompatActivity {
         attendanceAdapter = new AttendanceAdapter(dataList,hour);
         recyclerView.setAdapter(attendanceAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        back3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(AttendanceActivity.this,MainActivity.class);
+                startActivity(mark);
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

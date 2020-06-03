@@ -37,9 +37,10 @@ public class StudentAtdAdapter extends RecyclerView.Adapter<StudentAtdAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.rollNo.setText(dataList.get(position).get(0));
         holder.percentage.setText(dataList.get(position).get(1)+" %");
-        if(Integer.parseInt(dataList.get(position).get(1))<80)
+        if(Integer.parseInt(dataList.get(position).get(1))<=75)
             holder.percentage.setTextColor(Color.RED);
-
+        else
+            holder.percentage.setTextColor(Color.BLACK);
     }
 
     @Override

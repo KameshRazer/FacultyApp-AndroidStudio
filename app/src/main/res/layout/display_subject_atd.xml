@@ -12,6 +12,7 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:gravity="center"
+        android:textColor="@color/black"
         android:layout_marginRight="10dp"
         android:text="RollNo" />
 
@@ -23,6 +24,7 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:gravity="center"
+        android:textColor="@android:color/holo_green_dark"
         android:layout_marginLeft="10dp"
         android:text="precentage" />
 </RelativeLayout>

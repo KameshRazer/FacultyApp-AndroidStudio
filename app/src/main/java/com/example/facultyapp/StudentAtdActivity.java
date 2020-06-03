@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,7 @@ public class StudentAtdActivity extends AppCompatActivity {
     ArrayList<String > subjectArray = new ArrayList<>();
     ArrayList<ArrayList<String>> dataList = new ArrayList<>();
     StudentAtdAdapter studentAtdAdapter;
+    Button back4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +55,18 @@ public class StudentAtdActivity extends AppCompatActivity {
         subjectList.setAdapter(dataAdapter);
 
         subjectList.setOnItemSelectedListener(new SubjectAttendance());
-
+        back4 = findViewById(R.id.back4);
         studentAtdAdapter = new StudentAtdAdapter(dataList);
         recyclerView.setAdapter(studentAtdAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        back4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mark = new Intent(StudentAtdActivity.this,MainActivity.class);
+                startActivity(mark);
+            }
+        });
 
     }
     class SubjectAttendance implements AdapterView.OnItemSelectedListener{

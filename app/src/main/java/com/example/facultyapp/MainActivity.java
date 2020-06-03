@@ -103,4 +103,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+//        System.out.println("Login onRestart invoked");
+        //Checking previous Login
+        isLogged = logInfo.getBoolean("isLogged",false);
+        if(!isLogged)
+           finishAffinity();
+    }
+
 }
